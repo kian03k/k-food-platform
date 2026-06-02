@@ -1,0 +1,51 @@
+# 系统文件
+.DS_Store
+Thumbs.db
+
+# 全IDE缓存（IDEA/VSCode/PyCharm/STS/NetBeans）
+.idea/
+.vscode/
+*.iml
+*.iws
+*.ipr
+.apt_generated
+# STS项目配置
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+# NetBeans项目缓存
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+logs/
+
+# Vue/前端
+node_modules/
+dist/
+.env*
+npm-debug.log*
+yarn-error.log
+coverage/
+
+# Java SpringBoot
+target/
+*.class
+*.jar
+HELP.md
+# mvn白名单：忽略mvn目录，但保留打包依赖jar
+!.mvn/wrapper/maven-wrapper.jar
+!kong-food-java-api/src/main/resources/*.properties
+
+# Python
+__pycache__/
+*.py[cod]
+venv/
+*.so
+*.pyd
+.env

@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>页头</title>
+    <link rel="stylesheet" href="http://www.kong.cn/static/plugins/normalize-css/normalize.css" />
+    <link rel="stylesheet" href="http://www.kong.cn/static/plugins/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="http://www.kong.cn/static/css/page-learing-article.css" />
+    <link rel="stylesheet" href="http://www.kong.cn/static/css/page-learing-index.css" />
+    <link rel="stylesheet" href="http://www.kong.cn/static/css/page-header.css" />
+    <link rel="stylesheet" href="http://www.kong.cn/static/css/el/index.css" />
+    <link rel="stylesheet" href="http://www.kong.cn/static/css/main.css" />
+
+
+    <script src="http://www.kong.cn/static/js/vue/vue.min.js"></script>
+    <script src="http://www.kong.cn/static/js/jwt-decode/jwt-decode.min.js"></script>
+    <script src="http://www.kong.cn/static/js/base64.min.js"></script>
+    <script src="http://www.kong.cn/static/js/axios/axios.min.js"></script>
+    <script src="http://www.kong.cn/static/js/querystring/index.js"></script>
+    <script src="http://www.kong.cn/static/js/util.js"></script>
+    <script src="http://www.kong.cn/static/js/public.js"></script>
+    <script src="http://www.kong.cn/static/js/login.js"></script>
+    <script src="http://www.kong.cn/static/css/el/index.js"></script>
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+
+
+</head>
+<body >
+<div id="app">
+<!--头部导航-->
+<header>
+    <div class="learingHeader">
+        <nav class="navbar">            
+            <div class="">
+                <!-- <div class="logo"><img src="http://www.kong.cn/static/img/asset-logoIco.png" width="100%" alt=""></div> -->
+                <div class="logo"><img src="../img/logo1.jpeg"  alt="孔家美食网" height="61" width="121"></div>
+                <div class="nav-list">
+                    <ul class="nav navbar-nav">
+                        <li ><a href="http://www.kong.cn">首页</a></li>
+                        <li><a href="http://www.kong.cn/course/search.html">课程</a></li>
+                        <!-- <li><a href="#">学习规划</a></li> -->
+                        <li>                <div >
+                            <form action="${basePath}/save" method="post" name="form" id="formId" >
+                                <label for="uploadImage" class="custom-file-upload">
+                                    智能识图
+                                </label>
+                                <table>
+                                    <input type="file" id="uploadImage" name="uploadImage"
+                                    accept="image/gif,image/png,image/jpeg,image/bmp" @change="doSummit">
+                                </table>
+                            </form>
+                        </div>
+                    </li>
+                    </ul>
+                </div>
+
+
+
+
+                <div class="sign-in">
+                    <!-- 未登录 -->
+                    <!-- <a href="#">登录 </a> <span> | </span> <a href="#"> 注册</a>-->
+                    <!-- 登录 -->
+                    <!--<a href="#" class="personal"><span class="personalIco"></span>消息</a>-->
+                    <span v-if="logined == true">欢迎 {{this.user.name}}</span>
+                    <a href="javascript:;" @click="logout" v-if="logined == true">退出</a>
+					 <a href="javascript:;" @click="showlogin" v-if="logined == false">登陆&nbsp;|&nbsp;注册</a>
+                    <a href="http://ucenter.kong.cn/" class="personal" target="_blank">我的学习</a>
+                    <a href="http://teacher.kong.cn/" class="personal" target="_blank">创作中心</a>
+                    <!--<a href="#" class="myInfo"><img src="img/asset-myImg.jpg" alt="">个人中心</a>-->
+                </div>
+                <!--<div class="starch">
+                    <div><input type="text" class="input-search" placeholder="输入查询关键词"></div>
+                    <div class="searchword"><a href="">搜索</a> </div>
+                </div>-->
+                <div class="starch">
+                    <div><input type="text" id="keywords-text" class="input-search" v-model="keywords" @keyup.enter="search"  placeholder="输入查询关键词"></div>
+                    <div class="searchword"><a @click="search">搜索</a> </div>
+                </div>
+            </div>
+
+            <!-- <form action="${basePath}/save" method="post" name="form" id="formId">
+                <table>
+                    <tr>
+                        <td>名称：</td>
+                        <td><input type="text" id="title" name="entity.title" class="input"></td>
+                    </tr>
+                    <tr>
+                        <td>图片：</td>
+                        <td>
+                            <input type="file" id="uploadImage" name="uploadImage"
+                                   accept="image/gif,image/png,image/jpeg,image/bmp"/>
+             
+                            <input type="hidden" id="imgUrl" name="entity.imgUrl"
+                                   value="<s:property value='entity.imgUrl'/>">
+             
+                            <span>提示：文件大小不超过200k，建议图片宽高为300px*300px</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="button" @click="doSummit" value="提交"/>
+              
+                            <input type="reset" value="取消">
+                        </td>
+                    </tr>
+                </table>
+            </form> -->
+
+        </nav>
+
+    </div>
+</header>
+</div>
+<script type="text/x-template" id="login">
+<div>login....</div>
+</script>
+<script>
+
+  var headVm= new Vue({   //创建一个Vue的实例
+        el: "#app", //挂载点是id="app"的地方
+
+        data: {
+            keywords: '',
+            loginFormVisible: false,
+            activeName: 'login',
+            editLoading: false,
+            imageUrl: '',
+            formLabelWidth: '120px',
+            user:{
+                userid:'',
+                username: '',
+                userpic: '',
+                name:''
+            },
+            logined:false
+        },
+        methods: {
+            search() {
+                if (this.keywords === '') {
+                    window.location = "http://www.kong.cn/course/search.html"
+                } else {
+                    let keywords = encodeURIComponent(this.keywords)
+                    window.location = "http://www.kong.cn/course/search.html?keywords="+keywords
+                }
+            },
+           logout: function () {
+                this.$confirm('确认退出吗?', '提示', {
+                }).then(() => {
+                    logout()
+                    
+                }).catch(() => {
+
+                });
+            },
+            doSummit: function() {
+                        var formdata=new window.FormData($("#formId")[0]);
+                            $.ajax({
+                        url:'http://127.0.0.1:3969//upload',
+                        type: 'post',
+                    cache: false, //上传文件不需要缓存
+                    async : true,
+                    data: formdata,
+                    processData: false, // 此处是关键：告诉jQuery不要去处理发送的数据
+                    contentType: false, // 此处是关键：告诉jQuery不要去设置Content-Type请求头
+                    success: function (data) {
+                                //处理成功后动作，比如调转window.location.href ='/list'
+                                let keywords = encodeURIComponent(data)
+                                window.location = "http://www.kong.cn/course/search.html?keywords="+keywords
+                            },
+                    error : function(XMLHttpRequest, textStatus, errorThrown) {
+                            alert(errorThrown);
+                            }
+                    }); 
+                },
+            refresh_user:function(){
+                let activeUser= getActiveUser();
+                if(activeUser){
+                    this.logined = true
+                    this.user = activeUser;
+                    console.log(activeUser)
+                }
+            },
+//             refresh_user:function(){
+//                 //从sessionStorage中取出当前用户
+//                 let activeUser= getActiveUser();
+//                 //取出cookie中的令牌
+//                 let uid = getCookie("uid")
+// //                alert(uid)
+//                 //console.log(activeUser)
+//                 if(activeUser && uid && uid == activeUser.uid){
+//                     this.logined = true
+//                     this.user = activeUser;
+//                 }else{
+//                     if(!uid){
+//                         return ;
+//                     }
+//                     //请求查询jwt
+//                     getjwt().then((res) => {
+//                         if(res.success){
+//                             let jwt = res.jwt;
+//                             let activeUser = getUserInfoFromJwt(jwt)
+//                             if(activeUser){
+//                                 this.logined = true
+//                                 this.user = activeUser;
+//                                 setUserSession("activeUser",JSON.stringify(activeUser))
+//                             }
+//                         }
+//                     })
+//                 }
+//             },
+            resetForm:function(formName){
+                this.$refs[formName].resetFields();
+            },
+            showlogin: function(){
+                window.location = "http://www.kong.cn/sign.html?returnUrl="+ Base64.encode(window.location)
+            }
+        },
+       created() {
+
+        },
+        mounted(){
+            //刷新当前用户
+            this.refresh_user()
+        }
+    })
+</script>
+<style scoped>
+/* .nav-list{
+    margin-top: 50px;
+} */
+
+
+.custom-file-upload {
+    /* border: 1px solid #ccc; */
+    /* border: 5px solid #a71414; */
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+  }
+  #uploadImage {
+    display: none;
+  }
+
+</style>
+</body>
+</html>
