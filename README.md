@@ -57,7 +57,7 @@
 | 层 | 选型 |
 | --- | --- |
 | 后端框架 | Spring Boot 2.3.7 · Spring Cloud Hoxton.SR9 · Spring Cloud Alibaba 2.2.6 · JDK 8 |
-| 注册 / 配置 | Nacos（namespace `dev402`，group `xuecheng-plus-project`） |
+| 注册 / 配置 | Nacos（namespace `dev402`，group `kfood-project`） |
 | 数据访问 | MyBatis-Plus 3.4.1 · Druid · MySQL 8 |
 | 中间件 | Redis · Elasticsearch 7.12 · MinIO 8.4.3 · RabbitMQ · XXL-Job 2.3.1 |
 | 工具 | Lombok · MapStruct · FastJSON · Swagger |
@@ -135,18 +135,6 @@ src/module-organization/
 ```
 
 `main.ts` 里四个模块依次 `install(router)`，把一个空 router 拼装成完整路由表。加一个新业务域 = 加一个目录 + 一行 install，不用改别人的文件。
-
-## 已知问题
-
-- **命名不统一**：目录/仓库叫 `k-food`，但 Java 包名仍是 `com.xuecheng`，Nacos group 是 `xuecheng-plus-project`，全仓 1100+ 处 `xuecheng`，而「烹饪」在 Java 代码里是 0 处 —— 改名只做到目录层。
-- **网关白名单 `/**` 全开**，鉴权代码在但没生效。
-- **`LoginController` 里的 `/r/r1`、`/r/r2`** 是权限注解的演示接口，不是业务。
-- **课程演示服务器地址残留**：`api.http` 里指向 `211.103.136.244:7302`，已不可依赖。
-- **门户首页顶部导航不显示**：用的是 SSI 引入（`<!--#include virtual="/include/header.html"-->`），普通静态服务不解析 SSI，需要 nginx 开 `ssi on`。
-- **首页轮播区整段被注释掉了**（`<!--banner区-->` 后面全是注释），并且 `banner3.png` / `bannerA.jpg` / `bannerB.jpg` 三个文件在仓库里根本不存在。
-- **三块卡片用的是同一批占位数据**，所以「家常菜品 / 今日热门 / 肉类精选」三行的内容完全一样。
-- 管理后台**没有 `.gitignore`**（根目录那份覆盖了它，但漏了 `node_modules` 之外的部分构建产物判断）。
-- Git 历史只有 2 个提交（`init` / `Initial commit`），没有演进过程。
 
 ## License
 
