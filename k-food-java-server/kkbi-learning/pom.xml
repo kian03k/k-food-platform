@@ -4,16 +4,16 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <artifactId>kkbi-parent</artifactId>
-        <groupId>com.xuecheng</groupId>
+        <groupId>com.kfood</groupId>
         <version>0.0.1-SNAPSHOT</version>
         <relativePath>../kkbi-parent</relativePath>
     </parent>
     <artifactId>kkbi-learning</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>xuecheng-plus-learning-api</module>
-        <module>xuecheng-plus-learning-service</module>
-        <module>xuecheng-plus-learning-model</module>
+        <module>kfood-learning-api</module>
+        <module>kfood-learning-service</module>
+        <module>kfood-learning-model</module>
     </modules>
 
 

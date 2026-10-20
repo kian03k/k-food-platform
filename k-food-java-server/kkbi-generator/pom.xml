@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>kkbi-parent</artifactId>
-        <groupId>com.xuecheng</groupId>
+        <groupId>com.kfood</groupId>
         <version>0.0.1-SNAPSHOT</version>
         <relativePath>../kkbi-parent</relativePath>
     </parent>

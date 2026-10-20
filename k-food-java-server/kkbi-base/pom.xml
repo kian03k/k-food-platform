@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.xuecheng</groupId>
+        <groupId>com.kfood</groupId>
         <artifactId>kkbi-parent</artifactId>
         <version>0.0.1-SNAPSHOT</version>
         <!--基于当前pom.xml找到父工程-->

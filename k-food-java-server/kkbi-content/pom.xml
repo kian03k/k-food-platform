@@ -4,16 +4,16 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <artifactId>kkbi-parent</artifactId>
-        <groupId>com.xuecheng</groupId>
+        <groupId>com.kfood</groupId>
         <version>0.0.1-SNAPSHOT</version>
         <relativePath>../kkbi-parent</relativePath>
     </parent>
     <packaging>pom</packaging>
     <artifactId>kkbi-content</artifactId>
     <modules>
-        <module>xuecheng-plus-content-api</module>
-        <module>xuecheng-plus-content-model</module>
-        <module>xuecheng-plus-content-service</module>
+        <module>kfood-content-api</module>
+        <module>kfood-content-model</module>
+        <module>kfood-content-service</module>
     </modules>
 
 </project>
